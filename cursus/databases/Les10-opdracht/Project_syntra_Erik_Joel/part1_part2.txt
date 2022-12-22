@@ -1,0 +1,78 @@
+#Part 1 Stored procedures Erik en Joel
+
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `boetes_boven_bedragx_tussen_jaary_jaarz`(in be int,in jb int,in je int)
+BEGIN
+select b.spelersnr as speler, year(b.datum) as jaar,round(b.bedrag) as bedrag
+from boetes as b#,bestuursleden as bl,wedstrijden as w,teams as t,spelers as s
+where b.bedrag > be and year(b.datum) between jb and je;
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `boetes_per_jaar`(in jaar int)
+BEGIN
+select b.spelersnr,s.naam,s.voorletters,year(b.datum) as jaar,b.bedrag
+from boetes as b,spelers as s
+where b.spelersnr = s.spelersnr and year(b.datum) = (jaar);
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `boetes_per_speler`(in speler int)
+BEGIN
+select b.spelersnr,s.naam,s.voorletters , year(b.datum) as jaar,b.bedrag
+from boetes as b, spelers as s
+where b.spelersnr = s.spelersnr and b.spelersnr = (speler);
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `wedstrijden_gespeeld_door_speler`(in speler int )
+BEGIN
+select w.wedstrijdnr,w.spelersnr,s.naam,s.voorletters
+from wedstrijden as w,spelers as s
+where w.spelersnr = s.spelersnr and w.spelersnr = (speler);
+END
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `wedstrijden_gespeeld_door_team`(in team varchar(1))
+BEGIN
+select w.wedstrijdnr,w.teamnr,s.naam,s.voorletters
+from wedstrijden as w,spelers as s
+where w.spelersnr = s.spelersnr and w.teamnr = (team);
+END
+
+
+#Part 2 queries with advanced sql functions
+
+
+#absoluut_verschil_in_sets
+use database_tennis;
+select s.naam, w.wedstrijdnr, abs(w.gewonnen-w.verloren) as verschil_in_sets
+from wedstrijden as w
+join spelers as s using (spelersnr)
+
+#binair_bedrag
+use database_tennis;
+select b.spelersnr,s.naam,b.bedrag,bin (b.bedrag) as binair ,hex(b.bedrag) as hexadecimaal
+from boetes as b,spelers as s
+where b.spelersnr = s.spelersnr
+
+#if_in_mysql
+use database_tennis;
+SELECT s.naam,IF(b.bedrag<75, 'YES', 'NO') as boete_onder_75
+from spelers as s,boetes as b
+
+
+#isnumeric_via_concat (hiervoor is een extra veld classement aangemaakt in de tabel spelers) #gebruik van concat om de isnumeric() faciliteit in Mysql te gebruiken
+use database_tennis;
+
+select s.spelersnr,s.naam,s.classement, case
+						when concat('',classement * 1) = classement  then 'hoofdtabel' #concat
+                        else 'neventabel'
+                        end as tornooitabel
+from spelers as s
+
+#isnumeric_via_regexp (hiervoor is een extra veld classement aangemaakt in de tabel spelers)- #gebruik van regexp om de isnumeric() faciliteit in Mysql te gebruiken
+use database_tennis;
+
+select s.spelersnr,s.naam,s.classement, case
+						when classement REGEXP '^[0-9]+$'  then 'hoofdtabel' #REGEXP '^[0-9]+$'
+                        else 'neventabel'
+                        end as tornooitabel
+from spelers as s
+

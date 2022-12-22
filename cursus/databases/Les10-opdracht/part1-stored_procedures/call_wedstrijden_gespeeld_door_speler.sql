@@ -1,0 +1,1 @@
+call wedstrijden_gespeeld_door_speler (6)

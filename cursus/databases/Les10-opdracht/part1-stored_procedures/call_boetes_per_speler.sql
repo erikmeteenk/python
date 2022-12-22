@@ -1,0 +1,1 @@
+call boetes_per_speler(27)

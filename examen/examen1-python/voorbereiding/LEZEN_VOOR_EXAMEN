@@ -1,0 +1,28 @@
+- haakjes zetten bij booleans
+
+- het gelijkheidsteken is == , de enkele = is een toewijzingsteken
+
+-input geeft altijd een string terug
+
+-een string en een int kan je niet bij elkaar optellen
+
+-je kan niet itereren over de indexwaarden in de array zelf als er subarrays zijn 
+"list indices must be integers or slices, not list"
+ Voorbeeld
+    def exercise4():
+        array = [[1], [2,3], [4]]
+        for i in array:
+            print(array[i]) #dit werkt niet!!!!
+            #print(i) dit werkt wel
+    #exercise4()
+
+- laatste cijfer in range telt niet mee
+
+- meestal gebruik je voor iteraties best de range()
+
+- opgelet denk aan het verschil tussen positie(0,1,2,3...) in een lijst 
+en de waarde die op die positie staat( vb op positie 0 staat waarde 8, op positie 1 staat waarde 56)
+
+- slicing kan gebruikt worden om te splitsen op basis van de indices van een lijst: 
+vb print(lijst[1:3]) print het tweede en derde element van de lijst af
+

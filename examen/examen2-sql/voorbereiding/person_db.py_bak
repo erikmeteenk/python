@@ -1,0 +1,63 @@
+from mysql.connector import connect, Error
+from connection_detail import sql_details 
+
+def insert_person(name, birth_year, gender):
+    """Insert a person into the Imdb databes"""
+    INSERT_PERSON = """INSERT INTO persons (
+            name, birth_year, gender)
+            VALUES (%s, %s, %s)
+    """
+    try:
+        with connect(**sql_details) as connection:
+            cursor = connection.cursor()
+            cursor.execute(INSERT_PERSON, (name, birth_year, gender))
+            connection.commit()
+    except Error as err:
+        print(err)
+        raise
+
+
+def delete_person_by_id(id_):
+    """Delete a person from Imdb database by id"""
+    DELETE_PERSON = "DELETE FROM persons WHERE id = %s"
+    try:
+        with connect(**sql_details) as connection:
+            cursor = connection.cursor()
+            cursor.execute(DELETE_PERSON, (id_,))
+            connection.commit()
+    except Error as err:
+        print(err)
+        raise
+
+
+def update_person_by_id(id_, name, birth_year, gender):
+    """Update a person in Imdb database by id"""
+    UPDATE_PERSON = """UPDATE persons
+    SET name=%s, birth_year=%s, gender=%s
+    WHERE id = %s
+    """
+    try:
+        with connect(**sql_details) as connection:
+            cursor = connection.cursor()
+            cursor.execute(UPDATE_PERSON, (name, birth_year, gender, id_))
+            connection.commit()
+    except Error as err:
+        print(err)
+        raise
+
+
+def select_all_persons():
+    """Select all Persons from Imdb"""
+    SELECT_ALL_PERSONS = "SELECT * FROM persons"
+    try:
+        with connect(**sql_details) as connection:
+            cursor = connection.cursor()
+            cursor.execute(SELECT_ALL_PERSONS)
+            persons = cursor.fetchall()
+            return persons
+    except Error as err:
+        print(err)
+        raise
+
+
+

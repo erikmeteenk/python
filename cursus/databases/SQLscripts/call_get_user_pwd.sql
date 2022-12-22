@@ -1,0 +1,1 @@
+call get_user(1)

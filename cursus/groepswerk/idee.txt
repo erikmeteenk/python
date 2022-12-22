@@ -1,0 +1,53 @@
+#film
+
+producent
+
+naam
+
+genre
+
+box office
+
+acteurs
+
+componist
+
+regisseur
+
+rating
+
+
+#smart IT solutions
+
+medewerkers met specialisatie
+
+product(identificatie) hardware software consultancy
+
+klanten prospect effectief 
+
+leveranciers hardware software administratie
+
+orders
+
+
+#kabel
+
+Een bedrijf verkoopt speciale kabels en stekkers/connectoren aan klanten. 
+De kabels en toebehoren worden ingekocht bij verschillende leveranciers in binnen- en buitenland.
+Op de (door)verkochte producten (per meter of per eenheid) wordt een winstmarge genomen.  
+Van alle producten wordt een ruime stock bijgehouden om snel te kunnen inspelen op de behoeften van de klanten. 
+Op bestelling maakt het bedrijf ook speciale kabels en verbindingen "op maat" hiervoor is een gespecialiseerde technieker in dienst.
+Deze produceert de bestellingen met de materialen die het bedrijf in stock heeft.
+Deze producten op maat worden verkocht aan de productprijs + begroot maakloon.
+De verkoop gebeurt door een commerciële medewerker die tevens de aankopen van materiaal beheert.
+   
+
+Ik zie volgende tabellen:
+
+Klanten
+Leveranciers
+Producten
+Medewerkers
+		aankopen
+		verkopen
+		bestellingen "op maat"

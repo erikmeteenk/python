@@ -1,0 +1,1 @@
+select spelersnr, min(bedrag), max(bedrag) from database_tennis.boetes
